@@ -7,7 +7,7 @@
             switch (level)
             {
                 case 1:
-                    return new HanneLevel(spel);
+                    return new Level1(spel);
                 case 2:
                     return new Level2(spel);
                 case 3:
