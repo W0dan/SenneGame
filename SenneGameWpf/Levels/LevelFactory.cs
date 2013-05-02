@@ -25,7 +25,7 @@
                 case 9:
                     return new Level9(spel);
                 case 10:
-                    return new HanneLevel(spel);
+                    return new Level10(spel);
                 default:
                     return null;
             }

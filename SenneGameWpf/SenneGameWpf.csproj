@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="IProjectiel.cs" />
     <Compile Include="Levels\HanneLevel.cs" />
+    <Compile Include="Levels\Level10.cs" />
     <Compile Include="Levels\Level9.cs" />
     <Compile Include="Monsters\Cyclops.cs" />
     <Compile Include="Monsters\Piratenkapitein.cs" />

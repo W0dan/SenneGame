@@ -6,7 +6,6 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using SenneGameWpf.Levels;
 using SenneGameWpf.Monsters;
-using SenneGameWpf.Projectiel_van_ventje;
 
 namespace SenneGameWpf
 {
