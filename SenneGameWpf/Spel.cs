@@ -19,6 +19,9 @@ namespace SenneGameWpf
         private readonly List<IProjectiel> _projectielen = new List<IProjectiel>();
 
         private readonly DispatcherTimer _projectiel_timer;
+        private readonly DispatcherTimer _monster_timer;
+
+        private readonly System.Windows.Controls.Image _tekenBlad;
 
         public int _ventje_heeft_timeout
         {
@@ -26,13 +29,93 @@ namespace SenneGameWpf
             set { _ventje.Heb_timeout = value; }
         }
 
-        public Spel()
+        private int _huidigeLevel;
+        public Level HuidigeLevel { get; set; }
+
+        public Spel(System.Windows.Controls.Image tekenBlad)
         {
+            _tekenBlad = tekenBlad;
+
+            _monster_timer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 100) };
+            _monster_timer.Tick += MonsterTimerElapsed;
+
             _projectiel_timer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 5) };
             _projectiel_timer.Tick += ProjectielTimerElapsed;
+
+            _huidigeLevel = 1;
+            HuidigeLevel = LevelFactory.CreateLevel(_huidigeLevel, this);
+
+            StartLevel();
         }
+
+        private void MonsterTimerElapsed(object sender, EventArgs e)
+        {
+            _monster_timer.Stop();
+
+            if (_ventje_heeft_timeout > 0)
+            {
+                _ventje_heeft_timeout--;
+            }
+
+            var dode_monsterkes = new List<Monster>();
+
+            foreach (var monsterke in HuidigeLevel.Monsterkes)
+            {
+                monsterke.Beweeg();
+                if (monsterke.Is_dood)
+                {
+                    dode_monsterkes.Add(monsterke);
+                }
+            }
+
+            foreach (var doodMonsterke in dode_monsterkes)
+            {
+                HuidigeLevel.Monsterkes.Remove(doodMonsterke);
+            }
+
+            if (Level_is_gedaan)
+            {
+                Level_gedaan();
+                return;
+            }
+
+            _tekenBlad.Source = Teken_game();
+
+            _monster_timer.Start();
+        }
+
+        private void Level_gedaan()
+        {
+            _monster_timer.Stop();
+
+            if (Is_gewonnen)
+            {
+                HuidigeLevel = LevelFactory.CreateLevel(++_huidigeLevel, this);
+
+                if (HuidigeLevel == null)
+                {
+                    Gewonnen();
+                }
+                else
+                {
+                    StartLevel();
+                }
+            }
+            else
+            {
+                GameOver();
+            }
+        }
+
+        private void Gewonnen()
+        {
+            _tekenBlad.Source = new DrawingImage(Teken_gewonnen());
+        }
+
         private void ProjectielTimerElapsed(object sender, EventArgs e)
         {
+            _projectiel_timer.Stop();
+
             var gestopteProjectielen = new List<IProjectiel>();
 
             foreach (var projectiel in _projectielen)
@@ -56,6 +139,8 @@ namespace SenneGameWpf
                     projectiel.Stop();
                 }
             }
+
+            _projectiel_timer.Start();
         }
 
         public bool Level_is_gedaan
@@ -271,6 +356,19 @@ namespace SenneGameWpf
         public void StartLevel()
         {
             _projectiel_timer.Start();
+
+            _monster_timer.Start();
+
+            _tekenBlad.Source = Teken_game();
+        }
+
+        private DrawingImage Teken_game()
+        {
+            var game_tekening = new DrawingGroup();
+
+            game_tekening.Children.Add(Teken_jezelf());
+
+            return new DrawingImage(game_tekening);
         }
     }
 }

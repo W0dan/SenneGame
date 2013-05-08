@@ -36,5 +36,6 @@ namespace SenneGameWpf
         void Ventje_is_geraakt();
         int _ventje_heeft_timeout { get; set; }
 
+        Level HuidigeLevel { get; set; }
     }
 }
