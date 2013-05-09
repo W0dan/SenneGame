@@ -6,28 +6,36 @@ namespace SenneGameWpf.Monsters
 {
     public abstract class Monster
     {
+        public static Monster CreateMonster<T>(ISpel spel, Point point)
+            where T : Monster, new()
+        {
+            var monster = new T { Spel = spel };
+            monster.Ga_hier_staan(point);
+            return monster;
+        }
+
         protected static readonly Random Randomizer = new Random();
 
-        protected readonly ISpel Spel;
-        private readonly Size _hoe_groot_ben_ik;
+        protected ISpel Spel;
+        private Size _hoe_groot_ben_ik;
         protected Point WaarBenIk;
         protected bool Ben_dood;
         private readonly int _snelheid;
 
-        protected Monster(ISpel spel, Point waar_ben_ik)
+        protected Monster()
+            : this(new Size(10, 10), 5)
         {
-            Spel = spel;
-            WaarBenIk = waar_ben_ik;
-            _hoe_groot_ben_ik = new Size(10, 10);
-            _snelheid = 5;
         }
 
-        protected Monster(ISpel spel, Point waar_ben_ik, Size hoeGrootBenIk, int snelheid)
+        protected Monster(Size hoeGrootBenIk, int snelheid)
         {
-            Spel = spel;
-            WaarBenIk = waar_ben_ik;
             _hoe_groot_ben_ik = hoeGrootBenIk;
             _snelheid = snelheid;
+        }
+
+        public void Ga_hier_staan(Point point)
+        {
+            WaarBenIk = point;
         }
 
         public Point Waar_zijt_ge { get { return WaarBenIk; } }

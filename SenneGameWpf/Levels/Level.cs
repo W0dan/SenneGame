@@ -33,123 +33,18 @@ namespace SenneGameWpf.Levels
             Monsterkes = new List<Monster>();
         }
 
-        protected Monster AddHeks(Point point)
+        protected Monster AddMonster<T>(int x, int y)
+            where T : Monster, new()
         {
-            var monsterke = new Heks(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
+            return AddMonster<T>(new Point(x, y));
         }
 
-        protected Monster AddWeerwolf(Point point)
+        protected Monster AddMonster<T>(Point point)
+            where T : Monster, new()
         {
-            var monsterke = new Weerwolf(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddVampire(Point point)
-        {
-            var monsterke = new Vampire(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddZombie(Point point)
-        {
-            var monsterke = new Zombie(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddBlue(Point point)
-        {
-            var monsterke = new Blue(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddBigBlue(Point point)
-        {
-            var monsterke = new BigBlue(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddBigBlue(int x, int y)
-        {
-            var monsterke = new BigBlue(_spel, new Point(x, y));
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddFastBlue(Point point)
-        {
-            var monsterke = new Blue(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddFastBlue(int x, int y)
-        {
-            var monsterke = new Blue(_spel, new Point(x, y));
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddGigant(Point point)
-        {
-            var monsterke = new Gigant(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddTitan(Point point)
-        {
-            var monsterke = new Titan(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddTitan(int x, int y)
-        {
-            var monsterke = new Titan(_spel, new Point(x, y));
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddCyclops(int x, int y)
-        {
-            var monsterke = new Cyclops(_spel, new Point(x, y));
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddTroll(Point point)
-        {
-            var monsterke = new Troll(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddPiraat(Point point)
-        {
-            var monsterke = new Piraat(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddPiraat(int x, int y)
-        {
-            var monsterke = new Piraat(_spel, new Point(x, y));
-            Monsterkes.Add(monsterke);
-            return monsterke;
-        }
-
-        protected Monster AddPiratenkapitein(Point point)
-        {
-            var monsterke = new Piratenkapitein(_spel, point);
-            Monsterkes.Add(monsterke);
-            return monsterke;
+            var monster = Monster.CreateMonster<T>(_spel, point);
+            Monsterkes.Add(monster);
+            return monster;
         }
 
         protected virtual Hindernis AddTegel(int x, int y)

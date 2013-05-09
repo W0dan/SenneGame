@@ -7,9 +7,10 @@ namespace SenneGameWpf.Monsters
     {
         private int _life = 5;
 
-        public BigBlue(ISpel spel, Point waar_ben_ik)
-            : base(spel, waar_ben_ik, new Size(20, 20), 5)
+        public BigBlue()
+            : base(new Size(20, 20), 5)
         {
+
         }
 
         public override Drawing Teken_jezelf()

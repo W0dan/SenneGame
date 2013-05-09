@@ -15,7 +15,8 @@ namespace GameTest.Given_a_Monster
             var speelveld = new Mock<ISpel>();
 
             var waarBenIk = new Point(20, 20);
-            var sut = new Heks(speelveld.Object, waarBenIk);
+            var sut = Monster.CreateMonster<Heks>(speelveld.Object, waarBenIk);
+
 
             sut.Beweeg_naar_beneden();
 

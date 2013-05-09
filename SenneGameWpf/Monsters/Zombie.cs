@@ -7,12 +7,6 @@ namespace SenneGameWpf.Monsters
     {
         private int _life = 2;
 
-        public Zombie(ISpel spel, Point waar_ben_ik)
-            : base(spel, waar_ben_ik)
-        {
-
-        }
-
         public override Drawing Teken_jezelf()
         {
             var imageSource = Resources.GetImage("SenneGameWpf", "images/Enemies/Zombie.png");

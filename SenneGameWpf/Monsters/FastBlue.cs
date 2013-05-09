@@ -7,8 +7,8 @@ namespace SenneGameWpf.Monsters
     {
         private int _life = 1;
 
-        public FastBlue(ISpel spel, Point waar_ben_ik)
-            : base(spel, waar_ben_ik, new Size(10, 10), 10)
+        public FastBlue()
+            : base(new Size(10, 10), 10)
         {
         }
 

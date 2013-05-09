@@ -7,8 +7,8 @@ namespace SenneGameWpf.Monsters
     {
         private int _life = 40;
 
-        public Cyclops(ISpel spel, Point waar_ben_ik)
-            : base(spel, waar_ben_ik, new Size(30, 30), 5)
+        public Cyclops()
+            : base(new Size(30, 30), 5)
         {
         }
 

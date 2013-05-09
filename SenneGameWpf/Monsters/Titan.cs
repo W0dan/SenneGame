@@ -7,8 +7,8 @@ namespace SenneGameWpf.Monsters
     {
         private int _life = 50;
 
-        public Titan(ISpel spel, Point waar_ben_ik)
-            : base(spel, waar_ben_ik, new Size(40, 40), 5)
+        public Titan()
+            : base(new Size(40, 40), 5)
         {
         }
 

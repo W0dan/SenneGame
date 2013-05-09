@@ -5,9 +5,12 @@ namespace SenneGameWpf.Monsters
 {
     public abstract class SchietendMonster : Monster
     {
-        protected SchietendMonster(ISpel spel, Point waar_ben_ik) : base(spel, waar_ben_ik)
-        {
-        }
+        protected SchietendMonster()
+        { }
+
+        protected SchietendMonster(Size hoeGrootBenIk, int snelheid)
+            : base(hoeGrootBenIk, snelheid)
+        { }
 
         protected void Schiet_naar_links()
         {

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using SenneGameWpf.Hindernissen;
+using SenneGameWpf.Monsters;
 
 namespace SenneGameWpf.Levels
 {
@@ -21,15 +22,15 @@ namespace SenneGameWpf.Levels
 
         private void MaakMonsterkes()
         {
-            AddHeks(new Point(40, 40));
-            AddHeks(new Point(160, 160));
-            AddHeks(new Point(160, 40));
-            AddHeks(new Point(40, 160));
+            AddMonster<Heks>(new Point(40, 40));
+            AddMonster<Heks>(new Point(160, 160));
+            AddMonster<Heks>(new Point(160, 40));
+            AddMonster<Heks>(new Point(40, 160));
 
-            AddHeks(new Point(60, 60));
-            AddHeks(new Point(140, 140));
-            AddHeks(new Point(140, 60));
-            AddHeks(new Point(60, 140));
+            AddMonster<Heks>(new Point(60, 60));
+            AddMonster<Heks>(new Point(140, 140));
+            AddMonster<Heks>(new Point(140, 60));
+            AddMonster<Heks>(new Point(60, 140));
         }
 
         private void MaakHindernissen()

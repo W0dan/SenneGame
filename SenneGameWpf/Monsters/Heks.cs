@@ -5,11 +5,6 @@ namespace SenneGameWpf.Monsters
 {
     public class Heks : Monster
     {
-        public Heks(ISpel spel, Point waar_ben_ik) : base(spel, waar_ben_ik)
-        {
-
-        }
-
         public override Drawing Teken_jezelf()
         {
             var imageSource = Resources.GetImage("SenneGameWpf", "images/Enemies/Witch.png");

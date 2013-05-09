@@ -162,6 +162,72 @@ namespace SenneGameWpf
             }
         }
 
+        public bool Is_gameover { get { return _is_gameOver; } }
+        public bool Is_gewonnen { get { return _is_gewonnen; } }
+
+        public Ventje Zet_ventje(Point point)
+        {
+            if (_ventje == null)
+                _ventje = new Ventje(this, point);
+            else
+            {
+                _ventje.Ga_hier_staan(point);
+            }
+            return _ventje;
+        }
+
+        public void Ventje_is_geraakt()
+        {
+            _ventje.Is_geraakt();
+        }
+
+        public void GameOver()
+        {
+            _is_gameOver = true;
+            _projectiel_timer.Stop();
+        }
+
+        public void Win()
+        {
+            _is_gewonnen = true;
+        }
+
+        public void Ventje_schiet_naar_boven()
+        {
+            _projectielen.Add(_level.Ventje.Schiet_naar_boven());
+        }
+
+        public void Ventje_schiet_naar_beneden()
+        {
+            _projectielen.Add(_level.Ventje.Schiet_naar_beneden());
+        }
+
+        public void Ventje_schiet_naar_links()
+        {
+            _projectielen.Add(_level.Ventje.Schiet_naar_links());
+        }
+
+        public void Ventje_schiet_naar_rechts()
+        {
+            _projectielen.Add(_level.Ventje.Schiet_naar_rechts());
+        }
+
+        public void Monsterke_schiet(IProjectiel projectiel)
+        {
+            _projectielen.Add(projectiel);
+        }
+
+        public void StartLevel()
+        {
+            _projectiel_timer.Start();
+
+            _monster_timer.Start();
+
+            _tekenBlad.Source = Teken_game();
+        }
+
+        #region collission detection routines
+
         public bool Is_er_een_hindernis_in_de_weg(Point plek, Size grootte)
         {
             foreach (var hindernis in _level.Hindernissen)
@@ -252,6 +318,39 @@ namespace SenneGameWpf
             return null;
         }
 
+        #endregion
+
+        #region graphics routines
+
+        private DrawingImage Teken_game()
+        {
+            var game_tekening = new DrawingGroup();
+
+            game_tekening.Children.Add(Teken_jezelf());
+
+            return new DrawingImage(game_tekening);
+        }
+
+        public Drawing Teken_gameOver()
+        {
+            var imageSource = Resources.GetImage("SenneGameWpf", "images/gameover2.jpg");
+            var gameover = new ImageDrawing(imageSource, new Rect(0, 0, 600, 270));
+
+            var speelveld = new DrawingGroup();
+            speelveld.Children.Add(gameover);
+            return speelveld;
+        }
+
+        public Drawing Teken_probeer_opnieuw()
+        {
+            var imageSource = Resources.GetImage("SenneGameWpf", "images/tryagain.jpg");
+            var gameover = new ImageDrawing(imageSource, new Rect(0, 0, 617, 775));
+
+            var speelveld = new DrawingGroup();
+            speelveld.Children.Add(gameover);
+            return speelveld;
+        }
+
         public Drawing Teken_jezelf()
         {
             var speelveld = new DrawingGroup();
@@ -278,97 +377,6 @@ namespace SenneGameWpf
             return speelveld;
         }
 
-        public bool Is_gameover { get { return _is_gameOver; } }
-        public bool Is_gewonnen { get { return _is_gewonnen; } }
-
-        public Drawing Teken_gameOver()
-        {
-            var imageSource = Resources.GetImage("SenneGameWpf", "images/gameover2.jpg");
-            var gameover = new ImageDrawing(imageSource, new Rect(0, 0, 600, 270));
-
-            var speelveld = new DrawingGroup();
-            speelveld.Children.Add(gameover);
-            return speelveld;
-        }
-
-        public Drawing Teken_probeer_opnieuw()
-        {
-            var imageSource = Resources.GetImage("SenneGameWpf", "images/tryagain.jpg");
-            var gameover = new ImageDrawing(imageSource, new Rect(0, 0, 617, 775));
-
-            var speelveld = new DrawingGroup();
-            speelveld.Children.Add(gameover);
-            return speelveld;
-        }
-
-        public Ventje Zet_ventje(Point point)
-        {
-            if (_ventje == null)
-                _ventje = new Ventje(this, point);
-            else
-            {
-                _ventje.Ga_hier_staan(point);
-            }
-            return _ventje;
-        }
-
-        public void Ventje_is_geraakt()
-        {
-            _ventje.Is_geraakt();
-        }
-
-        public void GameOver()
-        {
-            _is_gameOver = true;
-            _projectiel_timer.Stop();
-        }
-
-        public void Win()
-        {
-            _is_gewonnen = true;
-        }
-
-        public void Ventje_schiet_naar_boven()
-        {
-            _projectielen.Add(_level.Ventje.Schiet_naar_boven());
-        }
-
-        public void Ventje_schiet_naar_beneden()
-        {
-            _projectielen.Add(_level.Ventje.Schiet_naar_beneden());
-        }
-
-        public void Ventje_schiet_naar_links()
-        {
-            _projectielen.Add(_level.Ventje.Schiet_naar_links());
-        }
-
-        public void Ventje_schiet_naar_rechts()
-        {
-            _projectielen.Add(_level.Ventje.Schiet_naar_rechts());
-        }
-
-        public void Monsterke_schiet(IProjectiel projectiel)
-        {
-            _projectielen.Add(projectiel);
-        }
-
-        public void StartLevel()
-        {
-            _projectiel_timer.Start();
-
-            _monster_timer.Start();
-
-            _tekenBlad.Source = Teken_game();
-        }
-
-        private DrawingImage Teken_game()
-        {
-            var game_tekening = new DrawingGroup();
-
-            game_tekening.Children.Add(Teken_jezelf());
-
-            return new DrawingImage(game_tekening);
-        }
+        #endregion
     }
 }

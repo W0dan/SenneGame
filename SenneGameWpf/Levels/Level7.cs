@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using SenneGameWpf.Hindernissen;
+using SenneGameWpf.Monsters;
 
 namespace SenneGameWpf.Levels
 {
@@ -21,34 +22,34 @@ namespace SenneGameWpf.Levels
 
         private void MaakMonsterkes()
         {
-            AddZombie(new Point(45, 45));
-            AddZombie(new Point(85, 45));
-            AddZombie(new Point(125, 45));
-            AddZombie(new Point(165, 45));
-            AddZombie(new Point(205, 45));
-            AddZombie(new Point(245, 45));
-            AddZombie(new Point(285, 45));
-            AddZombie(new Point(325, 45));
-            AddZombie(new Point(365, 45));
+            AddMonster<Zombie>(new Point(45, 45));
+            AddMonster<Zombie>(new Point(85, 45));
+            AddMonster<Zombie>(new Point(125, 45));
+            AddMonster<Zombie>(new Point(165, 45));
+            AddMonster<Zombie>(new Point(205, 45));
+            AddMonster<Zombie>(new Point(245, 45));
+            AddMonster<Zombie>(new Point(285, 45));
+            AddMonster<Zombie>(new Point(325, 45));
+            AddMonster<Zombie>(new Point(365, 45));
 
-            AddZombie(new Point(45, 155));
-            AddZombie(new Point(85, 155));
-            AddZombie(new Point(125, 155));
-            AddZombie(new Point(165, 155));
-            AddZombie(new Point(205, 155));
-            AddZombie(new Point(245, 155));
-            AddZombie(new Point(285, 155));
-            AddZombie(new Point(325, 155));
-            AddZombie(new Point(365, 155));
+            AddMonster<Zombie>(new Point(45, 155));
+            AddMonster<Zombie>(new Point(85, 155));
+            AddMonster<Zombie>(new Point(125, 155));
+            AddMonster<Zombie>(new Point(165, 155));
+            AddMonster<Zombie>(new Point(205, 155));
+            AddMonster<Zombie>(new Point(245, 155));
+            AddMonster<Zombie>(new Point(285, 155));
+            AddMonster<Zombie>(new Point(325, 155));
+            AddMonster<Zombie>(new Point(365, 155));
 
-            AddVampire(new Point(100, 100));
-            AddVampire(new Point(200, 100));
-            AddVampire(new Point(300, 100));
+            AddMonster<Vampire>(new Point(100, 100));
+            AddMonster<Vampire>(new Point(200, 100));
+            AddMonster<Vampire>(new Point(300, 100));
 
-            AddWeerwolf(new Point(50, 100));
-            AddWeerwolf(new Point(150, 100));
-            AddWeerwolf(new Point(250, 100));
-            AddWeerwolf(new Point(350, 100));
+            AddMonster<Weerwolf>(new Point(50, 100));
+            AddMonster<Weerwolf>(new Point(150, 100));
+            AddMonster<Weerwolf>(new Point(250, 100));
+            AddMonster<Weerwolf>(new Point(350, 100));
         }
 
         private void MaakHindernissen()

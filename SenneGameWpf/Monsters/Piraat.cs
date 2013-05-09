@@ -5,10 +5,6 @@ namespace SenneGameWpf.Monsters
 {
     public class Piraat : SchietendMonster
     {
-        public Piraat(ISpel spel, Point waar_ben_ik)
-            : base(spel, waar_ben_ik)
-        {
-        }
 
         public override Drawing Teken_jezelf()
         {

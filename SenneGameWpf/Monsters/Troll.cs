@@ -7,10 +7,9 @@ namespace SenneGameWpf.Monsters
     {
         private int _life = 30;
 
-        public Troll(ISpel spel, Point waar_ben_ik)
-            : base(spel, waar_ben_ik, new Size(20, 20), 5)
+        public Troll()
+            : base(new Size(20, 20), 5)
         {
-
         }
 
         public override Drawing Teken_jezelf()

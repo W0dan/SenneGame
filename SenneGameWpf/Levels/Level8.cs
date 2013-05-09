@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 using SenneGameWpf.Hindernissen;
+using SenneGameWpf.Monsters;
 
 namespace SenneGameWpf.Levels
 {
@@ -22,16 +23,16 @@ namespace SenneGameWpf.Levels
 
         private void MaakMonsterkes()
         {
-            AddTroll(new Point(40, 100));
-            AddTroll(new Point(100, 40));
-            AddTroll(new Point(160, 100));
-            AddTroll(new Point(100, 160));
+            AddMonster<Troll>(new Point(40, 100));
+            AddMonster<Troll>(new Point(100, 40));
+            AddMonster<Troll>(new Point(160, 100));
+            AddMonster<Troll>(new Point(100, 160));
 
-            AddTroll(new Point(160, 40));
-            AddTroll(new Point(40, 160));
-            AddTroll(new Point(160, 160));
+            AddMonster<Troll>(new Point(160, 40));
+            AddMonster<Troll>(new Point(40, 160));
+            AddMonster<Troll>(new Point(160, 160));
 
-            AddTitan(new Point(100, 100));
+            AddMonster<Titan>(new Point(100, 100));
         }
 
         private void MaakHindernissen()
