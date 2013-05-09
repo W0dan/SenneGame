@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 using System.Windows.Media;
 using SenneGameWpf.Projectiel_van_ventje;
 
@@ -6,6 +7,7 @@ namespace SenneGameWpf
 {
     public class Ventje
     {
+        private int _ammo = 1250; //minimum ammo to finish game appears to be 750
         private int _life = 3;
         private readonly Spel _spel;
         private readonly Size _hoe_groot_ben_ik;
@@ -52,6 +54,12 @@ namespace SenneGameWpf
 
                 dg.Children.Add(leven);
             }
+
+            var typeface = new Typeface("Arial");
+            var ammo = new FormattedText(string.Format("AMMO: {0}", _ammo), CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, typeface, 10, Brushes.Gray);
+            var textgeometry = ammo.BuildGeometry(new Point(130, -10));
+            var ammodrawing = new GeometryDrawing(Brushes.Gray, new Pen(Brushes.Gray, 0), textgeometry);
+            dg.Children.Add(ammodrawing);
 
             return dg;
         }
@@ -119,21 +127,37 @@ namespace SenneGameWpf
 
         public IProjectiel Schiet_naar_boven()
         {
+            if (_ammo <= 0)
+                return null;
+
+            _ammo -= 1;
             return new ProjectielVanVentjeNaarBoven(_spel, _waar_ben_ik);
         }
 
         public IProjectiel Schiet_naar_beneden()
         {
+            if (_ammo <= 0)
+                return null;
+
+            _ammo -= 1;
             return new ProjectielVanVentjeNaarBeneden(_spel, _waar_ben_ik);
         }
 
         public IProjectiel Schiet_naar_links()
         {
+            if (_ammo <= 0)
+                return null;
+
+            _ammo -= 1;
             return new ProjectielVanVentjeNaarLinks(_spel, _waar_ben_ik);
         }
 
         public IProjectiel Schiet_naar_rechts()
         {
+            if (_ammo <= 0)
+                return null;
+
+            _ammo -= 1;
             return new ProjectielVanVentjeNaarRechts(_spel, _waar_ben_ik);
         }
 

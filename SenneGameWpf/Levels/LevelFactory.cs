@@ -24,8 +24,8 @@
                     return new Level8(spel);
                 case 9:
                     return new Level9(spel);
-                case 10:
-                    return new Level10(spel);
+                //case 10:
+                //    return new Level10(spel);
                 default:
                     return null;
             }
