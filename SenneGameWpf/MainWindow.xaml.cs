@@ -40,16 +40,16 @@ namespace SenneGameWpf
                 switch (e.Key)
                 {
                     case Key.Up: //op, boven
-                        _spel.Ventje_schiet_naar_boven();
+                        _spel.Ventje_schiet(Direction.Up);
                         break;
                     case Key.Down: //neer, beneden
-                        _spel.Ventje_schiet_naar_beneden();
+                        _spel.Ventje_schiet(Direction.Down);
                         break;
                     case Key.Left: //links
-                        _spel.Ventje_schiet_naar_links();
+                        _spel.Ventje_schiet(Direction.Left);
                         break;
                     case Key.Right: //rechts
-                        _spel.Ventje_schiet_naar_rechts();
+                        _spel.Ventje_schiet(Direction.Right);
                         break;
                     default:
                         return;

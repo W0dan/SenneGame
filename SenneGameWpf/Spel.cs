@@ -192,30 +192,9 @@ namespace SenneGameWpf
             _is_gewonnen = true;
         }
 
-        public void Ventje_schiet_naar_boven()
+        public void Ventje_schiet(Direction direction)
         {
-            var projectiel = _level.Ventje.Schiet_naar_boven();
-            if (projectiel != null)
-                _projectielen.Add(projectiel);
-        }
-
-        public void Ventje_schiet_naar_beneden()
-        {
-            var projectiel = _level.Ventje.Schiet_naar_beneden();
-            if (projectiel != null)
-                _projectielen.Add(projectiel);
-        }
-
-        public void Ventje_schiet_naar_links()
-        {
-            var projectiel = _level.Ventje.Schiet_naar_links();
-            if (projectiel != null)
-                _projectielen.Add(projectiel);
-        }
-
-        public void Ventje_schiet_naar_rechts()
-        {
-            var projectiel = _level.Ventje.Schiet_naar_rechts();
+            var projectiel = _level.Ventje.Schiet(direction);
             if (projectiel != null)
                 _projectielen.Add(projectiel);
         }

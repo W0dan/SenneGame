@@ -47,21 +47,27 @@ namespace SenneGameWpf
 
             dg.Children.Add(ventje);
 
+            DrawDashboard(dg, -70, 0);
+
+            return dg;
+        }
+
+        private void DrawDashboard(DrawingGroup dg, int x, int y)
+        {
             var levenImageSource = Resources.GetImage("SenneGameWpf", "images/smiley Angry.png");
             for (var i = 0; i < _life; i++)
             {
-                var leven = new ImageDrawing(levenImageSource, new Rect(10 * i, -10, 10, 10));
+                var leven = new ImageDrawing(levenImageSource, new Rect(10 * i + x, y, 10, 10));
 
                 dg.Children.Add(leven);
             }
 
             var typeface = new Typeface("Arial");
-            var ammo = new FormattedText(string.Format("AMMO: {0}", _ammo), CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, typeface, 10, Brushes.Gray);
-            var textgeometry = ammo.BuildGeometry(new Point(130, -10));
+            var ammo = new FormattedText(string.Format("AMMO: {0}", _ammo), CultureInfo.CurrentUICulture,
+                                         FlowDirection.LeftToRight, typeface, 10, Brushes.Gray);
+            var textgeometry = ammo.BuildGeometry(new Point(x, y + 10));
             var ammodrawing = new GeometryDrawing(Brushes.Gray, new Pen(Brushes.Gray, 0), textgeometry);
             dg.Children.Add(ammodrawing);
-
-            return dg;
         }
 
         public void Beweeg_naar_boven()
@@ -125,40 +131,13 @@ namespace SenneGameWpf
             _spel.Win();
         }
 
-        public IProjectiel Schiet_naar_boven()
+        public IProjectiel Schiet(Direction direction)
         {
             if (_ammo <= 0)
                 return null;
 
             _ammo -= 1;
-            return new ProjectielVanVentjeNaarBoven(_spel, _waar_ben_ik);
-        }
-
-        public IProjectiel Schiet_naar_beneden()
-        {
-            if (_ammo <= 0)
-                return null;
-
-            _ammo -= 1;
-            return new ProjectielVanVentjeNaarBeneden(_spel, _waar_ben_ik);
-        }
-
-        public IProjectiel Schiet_naar_links()
-        {
-            if (_ammo <= 0)
-                return null;
-
-            _ammo -= 1;
-            return new ProjectielVanVentjeNaarLinks(_spel, _waar_ben_ik);
-        }
-
-        public IProjectiel Schiet_naar_rechts()
-        {
-            if (_ammo <= 0)
-                return null;
-
-            _ammo -= 1;
-            return new ProjectielVanVentjeNaarRechts(_spel, _waar_ben_ik);
+            return new Projectiel_van_ventje.Projectiel_van_ventje(_spel, _waar_ben_ik, direction);
         }
 
         public void Ga_hier_staan(Point waar)

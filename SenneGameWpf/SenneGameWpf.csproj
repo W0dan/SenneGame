@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Direction.cs" />
     <Compile Include="IProjectiel.cs" />
     <Compile Include="Levels\HanneLevel.cs" />
     <Compile Include="Levels\Level10.cs" />
@@ -97,10 +98,6 @@
     <Compile Include="Monsters\_Monster.cs" />
     <Compile Include="Plek_is_bezet_door.cs" />
     <Compile Include="Projectiel_van_ventje\Projectiel_van_ventje.cs" />
-    <Compile Include="Projectiel_van_ventje\ProjectielVanVentjeNaarBoven.cs" />
-    <Compile Include="Projectiel_van_ventje\ProjectielVanVentjeNaarBeneden.cs" />
-    <Compile Include="Projectiel_van_ventje\ProjectielVanVentjeNaarLinks.cs" />
-    <Compile Include="Projectiel_van_ventje\ProjectielVanVentjeNaarRechts.cs" />
     <Compile Include="Resources.cs" />
     <Compile Include="Spel.cs" />
     <Compile Include="Ventje.cs" />
@@ -204,6 +201,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Smiley Angry_timeout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\projectiles\bullet_down.png" />
+    <Resource Include="images\projectiles\bullet_left.png" />
+    <Resource Include="images\projectiles\bullet_right.png" />
+    <Resource Include="images\projectiles\bullet_up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

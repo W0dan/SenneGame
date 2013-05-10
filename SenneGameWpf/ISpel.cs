@@ -26,10 +26,7 @@ namespace SenneGameWpf
         Drawing Teken_gameOver();
         Drawing Teken_probeer_opnieuw();
 
-        void Ventje_schiet_naar_boven();
-        void Ventje_schiet_naar_beneden();
-        void Ventje_schiet_naar_links();
-        void Ventje_schiet_naar_rechts();
+        void Ventje_schiet(Direction direction);
 
         void StartLevel();
         void Monsterke_schiet(IProjectiel projectiel);

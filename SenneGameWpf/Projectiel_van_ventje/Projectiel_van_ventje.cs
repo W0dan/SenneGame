@@ -3,12 +3,22 @@ using System.Windows.Media;
 
 namespace SenneGameWpf.Projectiel_van_ventje
 {
-    public abstract class Projectiel_van_ventje : IProjectiel
+    public class Projectiel_van_ventje : IProjectiel
     {
         protected Spel _spel;
         protected Point _locatie;
         protected bool _gestopt;
+        private readonly Direction _direction;
         public bool Gestopt { get { return _gestopt; } }
+
+
+        public Projectiel_van_ventje(Spel spel, Point startpunt, Direction direction)
+        {
+            _direction = direction;
+            _spel = spel;
+            _locatie = startpunt;
+            _gestopt = false;
+        }
 
         public void Stop()
         {
@@ -37,26 +47,58 @@ namespace SenneGameWpf.Projectiel_van_ventje
             }
         }
 
-        protected abstract Point NieuweLocatie();
+        protected Point NieuweLocatie()
+        {
+            switch (_direction)
+            {
+                case Direction.Up:
+                    return new Point(_locatie.X, _locatie.Y - 2);
+                case Direction.Down:
+                    return new Point(_locatie.X, _locatie.Y + 2);
+                case Direction.Left:
+                    return new Point(_locatie.X - 2, _locatie.Y);
+                case Direction.Right:
+                    return new Point(_locatie.X + 2, _locatie.Y);
+            }
 
-        protected abstract Size Formaat { get; }
+            return new Point();
+        }
 
-        protected abstract LineGeometry Tekening { get; }
+        private Size Formaat { get; set; }
 
         public Drawing Teken_jezelf()
         {
-            var lijnen = new GeometryGroup();
+            ImageSource imageSource;
+            ImageDrawing bulletDrawing;
 
-            lijnen.Children.Add(Tekening);
+            switch (_direction)
+            {
+                case Direction.Up:
+                    imageSource = Resources.GetImage("SenneGameWpf", "images/projectiles/bullet_up.png");
+                    Formaat = new Size(1, 3);
+                    bulletDrawing = new ImageDrawing(imageSource, new Rect(_locatie.X, _locatie.Y - 3, 1, 3));
+                    break;
+                case Direction.Down:
+                    imageSource = Resources.GetImage("SenneGameWpf", "images/projectiles/bullet_down.png");
+                    Formaat = new Size(1, 3);
+                    bulletDrawing = new ImageDrawing(imageSource, new Rect(_locatie.X, _locatie.Y, 1, 3));
+                    break;
+                case Direction.Left:
+                    imageSource = Resources.GetImage("SenneGameWpf", "images/projectiles/bullet_left.png");
+                    Formaat = new Size(3, 1);
+                    bulletDrawing = new ImageDrawing(imageSource, new Rect(_locatie.X - 3, _locatie.Y, 3, 1));
+                    break;
+                case Direction.Right:
+                    imageSource = Resources.GetImage("SenneGameWpf", "images/projectiles/bullet_right.png");
+                    Formaat = new Size(3, 1);
+                    bulletDrawing = new ImageDrawing(imageSource, new Rect(_locatie.X, _locatie.Y, 3, 1));
+                    break;
+                default:
+                    bulletDrawing = null;
+                    break;
+            }
 
-            var drawing = new GeometryDrawing
-                {
-                    Geometry = lijnen,
-                    Pen = new Pen(Brushes.Black, 1),
-                    Brush = Brushes.Black
-                };
-
-            return drawing;
+            return bulletDrawing;
         }
     }
 }
