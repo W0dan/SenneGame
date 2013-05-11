@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace SenneGameWpf
 {
@@ -19,15 +18,6 @@ namespace SenneGameWpf
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             _spel = new Spel(TekenBlad);
-        }
-
-        private DrawingImage Teken_game()
-        {
-            var game_tekening = new DrawingGroup();
-
-            game_tekening.Children.Add(_spel.Teken_jezelf());
-
-            return new DrawingImage(game_tekening);
         }
 
         private void TekenBlad_OnKeyDown(object sender, KeyEventArgs e)
@@ -72,7 +62,7 @@ namespace SenneGameWpf
                         break;
                 }
 
-            TekenBlad.Source = Teken_game();
+            TekenBlad.Source = _spel.Teken_game();
         }
     }
 }

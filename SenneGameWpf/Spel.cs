@@ -185,6 +185,9 @@ namespace SenneGameWpf
         {
             _is_gameOver = true;
             _projectiel_timer.Stop();
+            _monster_timer.Stop();
+
+            _tekenBlad.Source = Teken_gameOver();
         }
 
         public void Win()
@@ -309,7 +312,7 @@ namespace SenneGameWpf
 
         #region graphics routines
 
-        private DrawingImage Teken_game()
+        public DrawingImage Teken_game()
         {
             var game_tekening = new DrawingGroup();
 
@@ -318,27 +321,17 @@ namespace SenneGameWpf
             return new DrawingImage(game_tekening);
         }
 
-        public Drawing Teken_gameOver()
+        private DrawingImage Teken_gameOver()
         {
             var imageSource = Resources.GetImage("SenneGameWpf", "images/gameover2.jpg");
             var gameover = new ImageDrawing(imageSource, new Rect(0, 0, 600, 270));
 
             var speelveld = new DrawingGroup();
             speelveld.Children.Add(gameover);
-            return speelveld;
+            return new DrawingImage( speelveld);
         }
 
-        public Drawing Teken_probeer_opnieuw()
-        {
-            var imageSource = Resources.GetImage("SenneGameWpf", "images/tryagain.jpg");
-            var gameover = new ImageDrawing(imageSource, new Rect(0, 0, 617, 775));
-
-            var speelveld = new DrawingGroup();
-            speelveld.Children.Add(gameover);
-            return speelveld;
-        }
-
-        public Drawing Teken_jezelf()
+        private Drawing Teken_jezelf()
         {
             var speelveld = new DrawingGroup();
 
@@ -354,7 +347,7 @@ namespace SenneGameWpf
             return speelveld;
         }
 
-        public Drawing Teken_gewonnen()
+        private Drawing Teken_gewonnen()
         {
             var imageSource = Resources.GetImage("SenneGameWpf", "images/win.jpg");
             var gewonnen = new ImageDrawing(imageSource, new Rect(0, 0, 1000, 667));

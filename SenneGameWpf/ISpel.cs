@@ -14,17 +14,14 @@ namespace SenneGameWpf
         bool Is_hier_de_uitgang(Point plek, Size grootte);
         bool Is_hier_het_ventje(Point plek, Size grootte);
         object Is_er_iets_geraakt(Point plek, Size grootte);
-        Drawing Teken_jezelf();
+        DrawingImage Teken_game();
         Ventje Zet_ventje(Point point);
         void GameOver();
         void Win();
-        Drawing Teken_gewonnen();
 
         bool Is_gameover { get; }
         bool Is_gewonnen { get; }
         Level Level { get; set; }
-        Drawing Teken_gameOver();
-        Drawing Teken_probeer_opnieuw();
 
         void Ventje_schiet(Direction direction);
 
