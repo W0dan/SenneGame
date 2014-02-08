@@ -1,13 +1,12 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
-using SenneGameWpf.Projectiel_van_ventje;
 
 namespace SenneGameWpf
 {
     public class Ventje
     {
-        private int _ammo = 1250; //minimum ammo to finish game appears to be 750
+        private int _ammo = 1750; //minimum ammo to finish game appears to be 750
         private int _life = 3;
         private readonly Spel _spel;
         private readonly Size _hoe_groot_ben_ik;

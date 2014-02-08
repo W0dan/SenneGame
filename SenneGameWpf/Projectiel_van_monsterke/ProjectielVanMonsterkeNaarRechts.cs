@@ -5,7 +5,8 @@ namespace SenneGameWpf.Projectiel_van_monsterke
 {
     public class ProjectielVanMonsterkeNaarRechts : Projectiel_van_monsterke
     {
-        public ProjectielVanMonsterkeNaarRechts(ISpel spel, Point startpunt)
+        public ProjectielVanMonsterkeNaarRechts(ISpel spel, Point startpunt, Brush brush)
+            : base(brush)
         {
             Spel = spel;
             Locatie = startpunt;

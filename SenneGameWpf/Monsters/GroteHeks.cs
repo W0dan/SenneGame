@@ -3,19 +3,21 @@ using System.Windows.Media;
 
 namespace SenneGameWpf.Monsters
 {
-    public class Piraat : SchietendMonster
+    public class GroteHeks : SchietendMonster
     {
-        public Piraat()
-            : base(Brushes.Red)
+        private int _levens = 10;
+
+        public GroteHeks()
+            : base(new Size(30, 30), 5, Brushes.Green)
         {
 
         }
 
         public override Drawing Teken_jezelf()
         {
-            var imageSource = Resources.GetImage("SenneGameWpf", "images/Enemies/Pirate.png");
+            var imageSource = Resources.GetImage("SenneGameWpf", "images/Enemies/Witch.png");
 
-            return new ImageDrawing(imageSource, new Rect(WaarBenIk.X - 5, WaarBenIk.Y - 5, 10, 10));
+            return new ImageDrawing(imageSource, new Rect(WaarBenIk.X - 15, WaarBenIk.Y - 15, 30, 30));
         }
 
         public override void Beweeg()
@@ -55,7 +57,10 @@ namespace SenneGameWpf.Monsters
 
         public override void Ben_geraakt()
         {
-            Ben_dood = true;
+            _levens--;
+
+            if (_levens <= 0)
+                Ben_dood = true;
         }
     }
 }

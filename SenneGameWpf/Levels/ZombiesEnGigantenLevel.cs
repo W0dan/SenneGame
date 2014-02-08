@@ -6,13 +6,13 @@ using SenneGameWpf.Monsters;
 
 namespace SenneGameWpf.Levels
 {
-    public class Level6 : Level
+    public class ZombiesEnGigantenLevel : Level
     {
         private readonly List<Hindernis> _hindernissen = new List<Hindernis>();
 
         private Hindernis _uitgang;
 
-        public Level6(ISpel spel)
+        public ZombiesEnGigantenLevel(ISpel spel)
             : base(spel)
         {
             MaakHindernissen();

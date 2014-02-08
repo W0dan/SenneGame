@@ -8,7 +8,7 @@ namespace SenneGameWpf.Monsters
         private int _life = 20;
 
         public Piratenkapitein()
-            : base(new Size(20, 20), 5)
+            : base(new Size(20, 20), 5, Brushes.Red)
         {
         }
 

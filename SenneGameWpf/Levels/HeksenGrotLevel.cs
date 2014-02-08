@@ -6,13 +6,13 @@ using SenneGameWpf.Monsters;
 
 namespace SenneGameWpf.Levels
 {
-    public class Level5 : Level
+    public class HeksenGrotLevel : Level
     {
         private readonly List<Hindernis> _hindernissen = new List<Hindernis>();
 
         private Hindernis _uitgang;
 
-        public Level5(ISpel spel)
+        public HeksenGrotLevel(ISpel spel)
             : base(spel)
         {
             MaakHindernissen();
@@ -22,14 +22,15 @@ namespace SenneGameWpf.Levels
 
         private void MaakMonsterkes()
         {
-            AddMonster<BigBlue>(new Point(100, 40));
-            AddMonster<Blue>(new Point(40, 40));
-            AddMonster<BigBlue>(new Point(40, 100));
-            AddMonster<Blue>(new Point(40, 160));
-            AddMonster<BigBlue>(new Point(100, 160));
-            AddMonster<Blue>(new Point(160, 40));
-            AddMonster<BigBlue>(new Point(160, 100));
-            AddMonster<Blue>(new Point(160, 160));
+            AddMonster<Heks>(new Point(40, 40));
+            AddMonster<Heks>(new Point(160, 160));
+            AddMonster<Heks>(new Point(160, 40));
+            AddMonster<Heks>(new Point(40, 160));
+
+            AddMonster<Heks>(new Point(60, 60));
+            AddMonster<Heks>(new Point(140, 140));
+            AddMonster<Heks>(new Point(140, 60));
+            AddMonster<Heks>(new Point(60, 140));
         }
 
         private void MaakHindernissen()
@@ -50,33 +51,22 @@ namespace SenneGameWpf.Levels
             _uitgang = new Hindernis(195, 15);
             _hindernissen.Add(_uitgang);
 
-            _hindernissen.Add(new Hindernis(45, 25));
-            _hindernissen.Add(new Hindernis(55, 35));
-            _hindernissen.Add(new Hindernis(55, 45));
-            _hindernissen.Add(new Hindernis(45, 55));
-            _hindernissen.Add(new Hindernis(25, 45));
-            _hindernissen.Add(new Hindernis(35, 55));
+            for (var x = 15; x < 180; x += 10)
+            {
+                _hindernissen.Add(new Hindernis(x, 55));
+                _hindernissen.Add(new Hindernis(x, 95));
+                _hindernissen.Add(new Hindernis(x, 135));
+                _hindernissen.Add(new Hindernis(x, 175));
+            }
 
-            _hindernissen.Add(new Hindernis(155, 25));
-            _hindernissen.Add(new Hindernis(145, 35));
-            _hindernissen.Add(new Hindernis(145, 45));
-            _hindernissen.Add(new Hindernis(155, 55));
-            _hindernissen.Add(new Hindernis(175, 45));
-            _hindernissen.Add(new Hindernis(165, 55));
+            for (var x = 25; x < 190; x += 10)
+            {
+                _hindernissen.Add(new Hindernis(x, 35));
+                _hindernissen.Add(new Hindernis(x, 75));
+                _hindernissen.Add(new Hindernis(x, 115));
+                _hindernissen.Add(new Hindernis(x, 155));
+            }
 
-            _hindernissen.Add(new Hindernis(35, 145));
-            _hindernissen.Add(new Hindernis(45, 145));
-            _hindernissen.Add(new Hindernis(25, 155));
-            _hindernissen.Add(new Hindernis(55, 155));
-            _hindernissen.Add(new Hindernis(55, 165));
-            _hindernissen.Add(new Hindernis(45, 175));
-
-            _hindernissen.Add(new Hindernis(155, 145));
-            _hindernissen.Add(new Hindernis(165, 145));
-            _hindernissen.Add(new Hindernis(145, 155));
-            _hindernissen.Add(new Hindernis(175, 155));
-            _hindernissen.Add(new Hindernis(145, 165));
-            _hindernissen.Add(new Hindernis(155, 175));
         }
 
         public override List<Hindernis> Hindernissen
@@ -91,7 +81,7 @@ namespace SenneGameWpf.Levels
 
         public override Point Plek_waar_ventje_begint
         {
-            get { return new Point(15, 15); }
+            get { return new Point(15, 185); }
         }
 
         public override Drawing Teken_jezelf()

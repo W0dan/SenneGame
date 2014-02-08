@@ -2,19 +2,36 @@
 using System.Windows;
 using System.Windows.Media;
 using SenneGameWpf.Hindernissen;
+using SenneGameWpf.Monsters;
 
 namespace SenneGameWpf.Levels
 {
-    public class Level10 : Level
+    public class GrootKruisLevel : Level
     {
         private readonly List<Hindernis> _hindernissen = new List<Hindernis>();
         private Hindernis _uitgang;
 
-        public Level10(ISpel spel)
+        public GrootKruisLevel(ISpel spel)
             : base(spel)
         {
             MaakHindernissen();
+            MaakMonsterkes();
             ZetVentje(spel);
+        }
+
+        private void MaakMonsterkes()
+        {
+            AddMonster<GroteHeks>(new Point(150, 50));
+            AddMonster<Weerwolf>(new Point(125, 25));
+            AddMonster<Weerwolf>(new Point(175, 75));
+
+            AddMonster<GroteHeks>(new Point(250, 150));
+            AddMonster<Weerwolf>(new Point(275, 125));
+            AddMonster<Weerwolf>(new Point(275, 175));
+
+            AddMonster<GroteHeks>(new Point(150, 250));
+            AddMonster<Weerwolf>(new Point(125, 275));
+            AddMonster<Weerwolf>(new Point(175, 225));
         }
 
         private void MaakHindernissen()

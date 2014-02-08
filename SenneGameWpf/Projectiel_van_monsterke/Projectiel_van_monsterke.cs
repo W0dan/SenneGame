@@ -9,6 +9,12 @@ namespace SenneGameWpf.Projectiel_van_monsterke
         protected Point Locatie;
         protected bool _gestopt;
         public bool Gestopt { get { return _gestopt; } }
+        private Brush _brush;
+
+        protected Projectiel_van_monsterke(Brush brush)
+        {
+            _brush = brush;
+        }
 
         public void Stop()
         {
@@ -61,8 +67,8 @@ namespace SenneGameWpf.Projectiel_van_monsterke
             var drawing = new GeometryDrawing
                 {
                     Geometry = lijnen,
-                    Pen = new Pen(Brushes.Red, 1),
-                    Brush = Brushes.Red
+                    Pen = new Pen(_brush, 1),
+                    Brush = _brush
                 };
 
             return drawing;

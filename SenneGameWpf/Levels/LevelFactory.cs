@@ -11,21 +11,21 @@
                 case 2:
                     return new Level2(spel);
                 case 3:
-                    return new Level3(spel);
+                    return new HeksenGrotLevel(spel);
                 case 4:
-                    return new Level4(spel);
+                    return new GevangenGigantLevel(spel);
                 case 5:
-                    return new Level5(spel);
+                    return new BluesLevel(spel);
                 case 6:
-                    return new Level6(spel);
+                    return new ZombiesEnGigantenLevel(spel);
                 case 7:
-                    return new Level7(spel);
+                    return new KerkhofLevel(spel);
                 case 8:
-                    return new Level8(spel);
+                    return new TrollenLevel(spel);
                 case 9:
-                    return new Level9(spel);
-                //case 10:
-                //    return new Level10(spel);
+                    return new GrootKruisLevel(spel);
+                case 10:
+                    return new PiratenLevel(spel);
                 default:
                     return null;
             }
