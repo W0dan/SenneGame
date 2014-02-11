@@ -7,6 +7,11 @@ namespace SenneGameWpf.Hindernissen
     {
         private Point _locatie;
 
+        public virtual bool IsDestructable
+        {
+            get { return false; }
+        }
+
         public Hindernis(double x, double y)
         {
             _locatie = new Point(x, y);

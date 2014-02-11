@@ -18,6 +18,13 @@ namespace SenneGameWpf.Levels
             MaakHindernissen();
             MaakMonsterkes();
             ZetVentje(spel);
+            MaakVerborgenKamers();
+        }
+
+        private void MaakVerborgenKamers()
+        {
+            var verborgenKamer = new KoningMonsterKamer(this, new Point(-100, 50), new Size(100, 100));
+            AddVerborgenKamer(verborgenKamer, new Point(5, 125));
         }
 
         private void MaakMonsterkes()
@@ -41,9 +48,17 @@ namespace SenneGameWpf.Levels
                 _hindernissen.Add(new Hindernis(x, 195));
             }
 
-            for (var y = 25; y < 190; y += 10)
+            for (var y = 25; y < 120; y += 10)
             {
                 _hindernissen.Add(new Hindernis(5, y));
+            }
+            for (var y = 135; y < 190; y += 10)
+            {
+                _hindernissen.Add(new Hindernis(5, y));
+            }
+
+            for (var y = 25; y < 190; y += 10)
+            {
                 _hindernissen.Add(new Hindernis(195, y));
             }
             _hindernissen.Add(new Hindernis(5, 15));
@@ -87,6 +102,11 @@ namespace SenneGameWpf.Levels
         public override Drawing Teken_jezelf()
         {
             var level = new DrawingGroup();
+
+            foreach (var verborgenKamer in VerborgenKamers)
+            {
+                level.Children.Add(verborgenKamer.Teken_jezelf());
+            }
 
             level.Children.Add(Teken_achtergrond());
             level.Children.Add(Teken_monsterkes_en_hindernissen());

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
+using SenneGameWpf.Hindernissen;
 using SenneGameWpf.Levels;
 using SenneGameWpf.Monsters;
 
@@ -230,6 +231,18 @@ namespace SenneGameWpf
             return false;
         }
 
+        public Hindernis Hindernis_in_de_weg(Point plek, Size grootte)
+        {
+            foreach (var hindernis in _level.Hindernissen)
+            {
+                if (Math.Abs(plek.X - hindernis.X) < (5 + grootte.Width / 2)
+                    && Math.Abs(plek.Y - hindernis.Y) < Math.Abs(5 + grootte.Height / 2))
+                    return hindernis;
+            }
+
+            return null;
+        }
+
         public bool Is_er_een_monster_in_de_weg(Point plek, Size grootte)
         {
             foreach (var monsterke in _level.Monsterkes)
@@ -283,8 +296,17 @@ namespace SenneGameWpf
 
         public object Is_er_iets_geraakt(Point plek, Size grootte)
         {
-            if (Is_er_een_hindernis_in_de_weg(plek, grootte))
+            var hindernisInDeWeg = Hindernis_in_de_weg(plek, grootte);
+            if (hindernisInDeWeg != null)
+            {
+                if (hindernisInDeWeg.IsDestructable)
+                {
+                    var destroyedHindernis = (DestructableHindernis) hindernisInDeWeg;
+                    destroyedHindernis.Destroy();
+                    _level.Hindernissen.Remove(hindernisInDeWeg);
+                }
                 return Plek_is_bezet_door.Hindernis;
+            }
 
             if (Math.Abs(plek.X - _ventje.Waar_zijt_ge.X) < (_ventje.Breedte / 2 + grootte.Width / 2)
                 && Math.Abs(plek.Y - _ventje.Waar_zijt_ge.Y) < Math.Abs(_ventje.Hoogte / 2 + grootte.Height / 2))
@@ -297,6 +319,10 @@ namespace SenneGameWpf
                     && !monsterke.Is_dood)
                 {
                     monsterke.Ben_geraakt();
+                    if (monsterke.Is_dood)
+                    {
+                        _ventje.MonsterGedood(monsterke);
+                    }
                     if (_level.Monsterkes.All(x => x.Is_dood))
                     {
                         _level.Hindernissen.Remove(_level.Uitgang);

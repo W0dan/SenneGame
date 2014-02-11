@@ -1,38 +1,56 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 using SenneGameWpf.Hindernissen;
 using SenneGameWpf.Monsters;
 
-namespace SenneGameWpf.Levels
+namespace SenneGameWpf.Levels.Level1
 {
-    public class Level2 : Level
+    public class Level1 : Level
     {
         private readonly List<Hindernis> _hindernissen = new List<Hindernis>();
 
         private Hindernis _uitgang;
 
-        public Level2(ISpel spel)
+        public Level1(ISpel spel)
             : base(spel)
         {
             MaakHindernissen();
             MaakMonsterkes();
             ZetVentje(spel);
+
+            MaakVerborgenKamers();
+        }
+
+        private void MaakVerborgenKamers()
+        {
+            var verborgenKamer1 = new VerborgenKamer1(this, new Point(100, -100), new Size(100, 100));
+            AddVerborgenKamer(verborgenKamer1, new Point(135, 5));
         }
 
         private void MaakMonsterkes()
         {
-            AddMonster<Zombie>(new Point(85, 85));
-            AddMonster<Zombie>(new Point(85, 115));
-            AddMonster<Zombie>(new Point(115, 85));
-            AddMonster<Zombie>(new Point(115, 115));
+            AddMonster<Heks>(new Point(40, 100));
+            AddMonster<Heks>(new Point(100, 40));
+            AddMonster<Heks>(new Point(160, 100));
+            AddMonster<Heks>(new Point(100, 160));
         }
 
         private void MaakHindernissen()
         {
-            for (var x = 5; x < 200; x += 10)
+            for (var x = 5; x < 135; x += 10)
             {
                 _hindernissen.Add(new Hindernis(x, 5));
+            }
+
+
+            for (var x = 145; x < 200; x += 10)
+            {
+                _hindernissen.Add(new Hindernis(x, 5));
+            }
+
+            for (var x = 5; x < 200; x += 10)
+            {
                 _hindernissen.Add(new Hindernis(x, 195));
             }
 
@@ -46,30 +64,18 @@ namespace SenneGameWpf.Levels
             _uitgang = new Hindernis(195, 185);
             _hindernissen.Add(_uitgang);
 
-            _hindernissen.Add(new Hindernis(95, 65));
-            _hindernissen.Add(new Hindernis(95, 75));
-            _hindernissen.Add(new Hindernis(95, 85));
             _hindernissen.Add(new Hindernis(95, 95));
             _hindernissen.Add(new Hindernis(95, 105));
-            _hindernissen.Add(new Hindernis(95, 115));
-            _hindernissen.Add(new Hindernis(95, 125));
-            _hindernissen.Add(new Hindernis(95, 135));
-            _hindernissen.Add(new Hindernis(95, 145));
-
-            _hindernissen.Add(new Hindernis(55, 105));
-            _hindernissen.Add(new Hindernis(65, 105));
-            _hindernissen.Add(new Hindernis(75, 105));
-            _hindernissen.Add(new Hindernis(85, 105));
-            _hindernissen.Add(new Hindernis(95, 105));
+            _hindernissen.Add(new Hindernis(105, 95));
             _hindernissen.Add(new Hindernis(105, 105));
-            _hindernissen.Add(new Hindernis(115, 105));
-            _hindernissen.Add(new Hindernis(125, 105));
-            _hindernissen.Add(new Hindernis(135, 105));
         }
 
         public override List<Hindernis> Hindernissen
         {
-            get { return _hindernissen; }
+            get
+            {
+                return _hindernissen;
+            }
         }
 
         public override Hindernis Uitgang
@@ -79,12 +85,20 @@ namespace SenneGameWpf.Levels
 
         public override Point Plek_waar_ventje_begint
         {
-            get { return new Point(15, 185); }
+            get
+            {
+                return new Point(20, 20);
+            }
         }
 
         public override Drawing Teken_jezelf()
         {
             var level = new DrawingGroup();
+
+            foreach (var verborgenKamer in VerborgenKamers)
+            {
+                level.Children.Add(verborgenKamer.Teken_jezelf());
+            }
 
             level.Children.Add(Teken_achtergrond());
             level.Children.Add(Teken_monsterkes_en_hindernissen());
@@ -97,6 +111,5 @@ namespace SenneGameWpf.Levels
             var imageSource = Resources.GetImage("SenneGameWpf", "images/background-01.jpg");
             return new ImageDrawing(imageSource, new Rect(0, 0, 200, 200));
         }
-
     }
 }

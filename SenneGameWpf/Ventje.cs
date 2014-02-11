@@ -1,11 +1,13 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
+using SenneGameWpf.Monsters;
 
 namespace SenneGameWpf
 {
     public class Ventje
     {
+        private int _points;
         private int _ammo = 1750; //minimum ammo to finish game appears to be 750
         private int _life = 3;
         private readonly Spel _spel;
@@ -14,6 +16,11 @@ namespace SenneGameWpf
         private const int _speed = 5;
 
         public int Heb_timeout { get; set; }
+
+        public void MonsterGedood(Monster monsterke)
+        {
+            _points++;
+        }
 
         public Ventje(Spel spel, Point waar_ben_ik)
         {
@@ -38,9 +45,9 @@ namespace SenneGameWpf
             ImageSource imageSource;
 
             if (!(Heb_timeout > 0))
-                imageSource = Resources.GetImage("SenneGameWpf", "images/smiley Angry.png");
+                imageSource = Resources.GetImage("SenneGameWpf", "images/tux_soldier.png");
             else
-                imageSource = Resources.GetImage("SenneGameWpf", "images/smiley Angry_timeout.png");
+                imageSource = Resources.GetImage("SenneGameWpf", "images/tux_snowman.png");
 
             var ventje = new ImageDrawing(imageSource, new Rect(_waar_ben_ik.X - 5, _waar_ben_ik.Y - 5, 10, 10));
 
@@ -61,12 +68,20 @@ namespace SenneGameWpf
                 dg.Children.Add(leven);
             }
 
-            var typeface = new Typeface("Arial");
-            var ammo = new FormattedText(string.Format("AMMO: {0}", _ammo), CultureInfo.CurrentUICulture,
-                                         FlowDirection.LeftToRight, typeface, 10, Brushes.Gray);
-            var textgeometry = ammo.BuildGeometry(new Point(x, y + 10));
-            var ammodrawing = new GeometryDrawing(Brushes.Gray, new Pen(Brushes.Gray, 0), textgeometry);
+            var ammodrawing = DrawText(x, y + 10, string.Format("AMMO: {0}", _ammo));
             dg.Children.Add(ammodrawing);
+            var pointsdrawing = DrawText(x, y + 20, string.Format("POINTS: {0}", _points));
+            dg.Children.Add(pointsdrawing);
+        }
+
+        private GeometryDrawing DrawText(int x, int y, string text)
+        {
+            var typeface = new Typeface("Arial");
+            var ammo = new FormattedText(text, CultureInfo.CurrentUICulture,
+                                         FlowDirection.LeftToRight, typeface, 10, Brushes.Gray);
+            var textgeometry = ammo.BuildGeometry(new Point(x, y));
+            var ammodrawing = new GeometryDrawing(Brushes.Gray, new Pen(Brushes.Gray, 0), textgeometry);
+            return ammodrawing;
         }
 
         public void Beweeg_naar_boven()

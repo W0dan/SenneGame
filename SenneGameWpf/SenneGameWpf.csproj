@@ -56,12 +56,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Direction.cs" />
+    <Compile Include="Hindernissen\DestructableHindernis.cs" />
     <Compile Include="IProjectiel.cs" />
+    <Compile Include="Levels\3 HeksenGrotLevel\KoningMonsterKamer.cs" />
     <Compile Include="Levels\HanneLevel.cs" />
     <Compile Include="Levels\GrootKruisLevel.cs" />
+    <Compile Include="Levels\1 Level1\VerborgenKamer3.cs" />
+    <Compile Include="Levels\1 Level1\VerborgenKamer2.cs" />
+    <Compile Include="Levels\1 Level1\Level1.cs" />
+    <Compile Include="Levels\1 Level1\VerborgenKamer1.cs" />
+    <Compile Include="Levels\2 Level2\VerborgenKamer12.cs" />
+    <Compile Include="Levels\2 Level2\Level2.cs" />
+    <Compile Include="Levels\2 Level2\VerborgenKamer1.cs" />
+    <Compile Include="Levels\2 Level2\VerborgenKamer2.cs" />
+    <Compile Include="Levels\2 Level2\VerborgenKamer3.cs" />
     <Compile Include="Levels\PiratenLevel.cs" />
+    <Compile Include="Levels\VerborgenKamer.cs" />
     <Compile Include="Monsters\GroteHeks.cs" />
     <Compile Include="Monsters\Cyclops.cs" />
+    <Compile Include="Monsters\KoningMonster.cs" />
     <Compile Include="Monsters\Piratenkapitein.cs" />
     <Compile Include="Monsters\Piraat.cs" />
     <Compile Include="Monsters\_SchietendMonster.cs" />
@@ -81,10 +94,8 @@
     <Compile Include="Levels\ZombiesEnGigantenLevel.cs" />
     <Compile Include="Levels\BluesLevel.cs" />
     <Compile Include="Levels\GevangenGigantLevel.cs" />
-    <Compile Include="Levels\HeksenGrotLevel.cs" />
-    <Compile Include="Levels\Level1.cs" />
+    <Compile Include="Levels\3 HeksenGrotLevel\HeksenGrotLevel.cs" />
     <Compile Include="Levels\Level.cs" />
-    <Compile Include="Levels\Level2.cs" />
     <Compile Include="Levels\LevelFactory.cs" />
     <Compile Include="Monsters\BigBlue.cs" />
     <Compile Include="Monsters\Titan.cs" />
@@ -208,6 +219,13 @@
     <Resource Include="images\projectiles\bullet_left.png" />
     <Resource Include="images\projectiles\bullet_right.png" />
     <Resource Include="images\projectiles\bullet_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\tux_snowman.png" />
+    <Resource Include="images\tux_soldier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Enemies\CartmanNinja.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

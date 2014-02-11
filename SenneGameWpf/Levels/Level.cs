@@ -14,6 +14,20 @@ namespace SenneGameWpf.Levels
         private readonly ISpel _spel;
         private Ventje _ventje;
         public abstract List<Hindernis> Hindernissen { get; }
+        private readonly List<VerborgenKamer> _verborgenKamers = new List<VerborgenKamer>();
+
+        public void AddVerborgenKamer(VerborgenKamer verborgenKamer, Point ingangPosition)
+        {
+            _verborgenKamers.Add(verborgenKamer);
+            Hindernissen.Add(new DestructableHindernis(ingangPosition.X, ingangPosition.Y,
+                () =>
+                {
+                    verborgenKamer.Ontdek();
+                    Hindernissen.AddRange(verborgenKamer.Hindernissen);
+                }));
+        }
+
+        public IEnumerable<VerborgenKamer> VerborgenKamers { get { return _verborgenKamers; } }
 
         public abstract Hindernis Uitgang { get; }
 
@@ -33,13 +47,13 @@ namespace SenneGameWpf.Levels
             Monsterkes = new List<Monster>();
         }
 
-        protected Monster AddMonster<T>(int x, int y)
+        public Monster AddMonster<T>(int x, int y)
             where T : Monster, new()
         {
             return AddMonster<T>(new Point(x, y));
         }
 
-        protected Monster AddMonster<T>(Point point)
+        public Monster AddMonster<T>(Point point)
             where T : Monster, new()
         {
             var monster = Monster.CreateMonster<T>(_spel, point);
